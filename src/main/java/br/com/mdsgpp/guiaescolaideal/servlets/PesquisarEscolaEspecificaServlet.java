@@ -15,13 +15,14 @@ import br.com.mdsgpp.guiaescolaideal.dao.ConnectionFactory;
 import br.com.mdsgpp.guiaescolaideal.dao.EscolaDAO;
 import br.com.mdsgpp.guiaescolaideal.util.ConnectionUtil;
 
-@WebServlet(value = "/realizarConsultaEscolaEspecifica.jsp")
+@WebServlet( value = "/realizarConsultaEscolaEspecifica.jsp" )
+
 public class PesquisarEscolaEspecificaServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
 
     @Override
-    public void service(ServletRequest request, ServletResponse response)
+    public void service( ServletRequest request, ServletResponse response )
 	    throws ServletException, IOException {
 
 	RequestDispatcher dispatcher = null;
@@ -29,34 +30,35 @@ public class PesquisarEscolaEspecificaServlet extends HttpServlet {
 	String estado = null;
 	String municipio = null;
 
-	nome = request.getParameter("nome");
-	estado = request.getParameter("estado");
-	municipio = request.getParameter("municipio");
+	nome = request.getParameter( "nome" );
+	estado = request.getParameter( "estado" );
+	municipio = request.getParameter( "municipio" );
 
 	Connection con = null;
 
 	try {
 	    con = new ConnectionFactory().getConnection();
-	    EscolaDAO escolaDAO = new EscolaDAO(con);
-	    EscolaControl escolaControl = new EscolaControl(escolaDAO);
+	    EscolaDAO escolaDAO = new EscolaDAO( con );
+	    EscolaControl escolaControl = new EscolaControl( escolaDAO );
 
-	    request.setAttribute("listaescola",
-		    escolaControl.getEscolaEspecifica(nome, estado, municipio));
+	    request.setAttribute( "listaescola",
+		    escolaControl.getEscolaEspecifica( nome, estado, municipio ) );
 
-	    dispatcher = request.getRequestDispatcher("/resultadoPesquisa.jsp");
-	} catch (Exception e) {
-	    dispatcher = setDispatcherErro(request, e);
+	    dispatcher = request.getRequestDispatcher( "/resultadoPesquisa.jsp" );
+	}
+	catch ( Exception e ) {
+	    dispatcher = setDispatcherErro( request, e );
 	}
 	
-	ConnectionUtil.closeConnection(con);
-	dispatcher.forward(request, response);
+	ConnectionUtil.closeConnection( con );
+	dispatcher.forward( request, response );
     }
 
-    private RequestDispatcher setDispatcherErro(ServletRequest request,
-	    Exception e) {
+    private RequestDispatcher setDispatcherErro( ServletRequest request,
+	    Exception e ) {
 	RequestDispatcher dispatcher;
-	request.setAttribute("erroMsg", e.getMessage());
-	dispatcher = request.getRequestDispatcher("/erro.jsp");
+	request.setAttribute( "erroMsg", e.getMessage() );
+	dispatcher = request.getRequestDispatcher( "/erro.jsp" );
 	return dispatcher;
     }
 
