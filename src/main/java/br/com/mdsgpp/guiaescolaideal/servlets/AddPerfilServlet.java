@@ -20,12 +20,13 @@ import br.com.mdsgpp.guiaescolaideal.model.Escola;
 import br.com.mdsgpp.guiaescolaideal.util.Compara;
 import br.com.mdsgpp.guiaescolaideal.util.ConnectionUtil;
 
-@WebServlet(value = "/addPerfilServlet.jsp")
+@WebServlet( value = "/addPerfilServlet.jsp" )
+
 public class AddPerfilServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
 
-    public void service(ServletRequest request, ServletResponse response)
+    public void service( ServletRequest request, ServletResponse response )
 	    throws ServletException, IOException {
 
 	RequestDispatcher dispatcher = null;
@@ -33,52 +34,53 @@ public class AddPerfilServlet extends HttpServlet {
 
 	try {
 
-	    HttpSession session = ((HttpServletRequest) request).getSession();
+	    HttpSession session = ( ( HttpServletRequest ) request ).getSession();
 
-	    if (!verificaSeExisteAtributoCompara(session)) {
-		criaAtributoCompara(session);
+	    if ( !verificaSeExisteAtributoCompara( session ) ) {
+		criaAtributoCompara( session );
 	    }
 
-	    String id = request.getParameter("id");
+	    String id = request.getParameter( "id" );
 
 	    connection = new ConnectionFactory().getConnection();
-	    EscolaControl control = configuraControlEscola(connection);
-	    Escola escola = control.getEscolaPorId(id);
+	    EscolaControl control = configuraControlEscola( connection );
+	    Escola escola = control.getEscolaPorId( id );
 
-	    Compara compara = (Compara) session.getAttribute("compara");
-	    compara.add(escola);
+	    Compara compara = ( Compara ) session.getAttribute( "compara" );
+	    compara.add( escola );
 
-	    dispatcher = request.getRequestDispatcher("/comparaPerfis.jsp");
-	} catch (Exception e) {
-	    dispatcher = setDispatcherErro(request, e);
+	    dispatcher = request.getRequestDispatcher( "/comparaPerfis.jsp" );
+	}
+	catch ( Exception e ) {
+	    dispatcher = setDispatcherErro( request, e );
 	}
 
-	ConnectionUtil.closeConnection(connection);
-	dispatcher.forward(request, response);
+	ConnectionUtil.closeConnection( connection );
+	dispatcher.forward( request, response );
     }
 
-    private EscolaControl configuraControlEscola(Connection connection)
+    private EscolaControl configuraControlEscola( Connection connection )
 	    throws SQLException {
-	EscolaDAO escolaDAO = new EscolaDAO(connection);
-	return new EscolaControl(escolaDAO);
+	EscolaDAO escolaDAO = new EscolaDAO( connection );
+	return new EscolaControl( escolaDAO );
     }
 
-    private void criaAtributoCompara(HttpSession session) {
+    private void criaAtributoCompara( HttpSession session ) {
 	Compara compara = new Compara();
-	session.setAttribute("compara", compara);
+	session.setAttribute( "compara", compara );
     }
 
-    private boolean verificaSeExisteAtributoCompara(HttpSession session) {
-	return (session.getAttribute("compara") != null ? true : false);
+    private boolean verificaSeExisteAtributoCompara( HttpSession session ) {
+	return ( session.getAttribute( "compara" ) != null ? true : false );
     }
 
-    private RequestDispatcher setDispatcherErro(ServletRequest request,
-	    Exception e) {
+    private RequestDispatcher setDispatcherErro( ServletRequest request,
+	    Exception e ) {
 	System.out.println(e.getMessage());
 	RequestDispatcher dispatcher;
-	request.setAttribute("erroMsg", e.getMessage());
-	request.setAttribute("redirecionaPara", "comparaPerfis.jsp");
-	dispatcher = request.getRequestDispatcher("/erro.jsp");
+	request.setAttribute( "erroMsg", e.getMessage() );
+	request.setAttribute( "redirecionaPara", "comparaPerfis.jsp" );
+	dispatcher = request.getRequestDispatcher( "/erro.jsp" );
 	return dispatcher;
     }
 }

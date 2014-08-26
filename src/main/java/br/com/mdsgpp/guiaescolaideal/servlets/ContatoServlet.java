@@ -12,13 +12,14 @@ import javax.servlet.http.HttpServletResponse;
 import br.com.mdsgpp.guiaescolaideal.control.ContatoControl;
 import br.com.mdsgpp.guiaescolaideal.exceptions.ContatoException;
 
-@WebServlet(value = "/enviarEmail.jsp")
+@WebServlet( value = "/enviarEmail.jsp" )
+
 public class ContatoServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
 
-    protected void service(HttpServletRequest request,
-	    HttpServletResponse response) throws ServletException, IOException {
+    protected void service( HttpServletRequest request,
+	    HttpServletResponse response ) throws ServletException, IOException {
 
 	ContatoControl control = new ContatoControl();
 	RequestDispatcher dispatcher = null;
@@ -28,26 +29,29 @@ public class ContatoServlet extends HttpServlet {
 	String assunto = null;
 	String mensagem = null;
 
-	nome = request.getParameter("name");
-	email = request.getParameter("email");
-	assunto = request.getParameter("assunto");
-	mensagem = request.getParameter("mensagem");
+	nome = request.getParameter( "name" );
+	email = request.getParameter( "email" );
+	assunto = request.getParameter( "assunto" );
+	mensagem = request.getParameter( "mensagem" );
 
 	String mensagemCompleta = "Enviada por " + nome + " <" + email + " >"
 		+ "\n" + mensagem;
+	
 	try {
-	    control.sendMail("contato.guiaescolaideal@gmail.com",
+	    control.sendMail( "contato.guiaescolaideal@gmail.com",
 		    "contato.guiaescolaideal@gmail.com", assunto,
-		    mensagemCompleta);
+		    mensagemCompleta );
 
-	    dispatcher = request.getRequestDispatcher("/enviado.jsp");
+	    dispatcher = request.getRequestDispatcher( "/enviado.jsp" );
 
-	} catch (ContatoException e) {
-
-	    request.setAttribute("erroMsg", e.getMessage());
-	    dispatcher = request.getRequestDispatcher("/erro.jsp");
 	}
-	dispatcher.forward(request, response);
+	catch ( ContatoException e ) {
+
+	    request.setAttribute( "erroMsg", e.getMessage() );
+	    dispatcher = request.getRequestDispatcher( "/erro.jsp" );
+	}
+	
+	dispatcher.forward( request, response );
     }
 
 }
