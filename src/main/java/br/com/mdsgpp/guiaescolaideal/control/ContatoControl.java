@@ -1,4 +1,4 @@
-package br.com.mdsgpp.guiaescolaideal.control;
+ package br.com.mdsgpp.guiaescolaideal.control;
 
 import java.util.Properties;  
 
@@ -20,21 +20,26 @@ public class ContatoControl {
     private String mailSMTPServer;  
     private String mailSMTPServerPort;  
       
-    /* 
-     * quando instanciar um Objeto ja sera atribuido o servidor SMTP do GMAIL  
+    /**
+     * Quando instanciar um Objeto ja sera atribuido o servidor SMTP do GMAIL  
      * e a porta usada por ele 
      */  
-    public ContatoControl() { //Para o GMAIL   
+    
+  // Para o GMAIL
+    public ContatoControl() {    
         mailSMTPServer = "smtp.gmail.com";  
         mailSMTPServerPort = "465";  
         
         this.session = configuraSession();
-    }  
-    /* 
+    } 
+    
+    /** 
      * caso queira mudar o servidor e a porta, so enviar para o contrutor 
      * os valor como string 
      */  
-    public ContatoControl(String mailSMTPServer, String mailSMTPServerPort) { //Para outro Servidor  
+    
+  // Para outro Servidor
+    public ContatoControl(String mailSMTPServer, String mailSMTPServerPort) {   
         this.mailSMTPServer = mailSMTPServer;  
         this.mailSMTPServerPort = mailSMTPServerPort; 
         
@@ -46,8 +51,9 @@ public class ContatoControl {
     }
     
     public void sendMail(String from, String to, String subject, String message) throws ContatoException {  
-        session.getProperties().put("mail.smtp.user", from); //usuario ou seja, a conta que esta enviando o email (tem que ser do GMAIL)
-        //Objeto que contém a mensagem  
+        session.getProperties().put("mail.smtp.user", from); // usuario ou seja, a conta que esta enviando o email (tem que ser do GMAIL)
+        
+        // Objeto que contém a mensagem  
         Message msg = new MimeMessage(session);  
   
         try {  
