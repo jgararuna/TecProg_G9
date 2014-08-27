@@ -110,8 +110,7 @@ public class ContatoControl {
 	 * do servidor Proxy
 	 */
 
-	props.put("mail.transport.protocol", "smtp"); // Define protocolo de
-						      // envio como SMTP
+	props.put("mail.transport.protocol", "smtp"); // Define protocolo de envio como SMTP
 	props.put("mail.smtp.starttls.enable", "true");
 	props.put("mail.smtp.host", mailSMTPServer); // Server SMTP do GMAIL
 	props.put("mail.smtp.auth", "true"); // Ativa autenticacao
