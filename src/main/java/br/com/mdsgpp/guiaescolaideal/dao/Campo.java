@@ -6,5 +6,5 @@ import br.com.mdsgpp.guiaescolaideal.exceptions.PesquisaException;
 
 public interface Campo {
     public String gerarCondicao();
-    public void addValorACondicao(PreparedStatement stmt, int posicao) throws PesquisaException;
+    public void addValorACondicao( PreparedStatement stmt, int posicao ) throws PesquisaException;
 }
