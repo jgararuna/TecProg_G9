@@ -17,51 +17,56 @@ public class Compara {
 
     public Escola getEscolaA() {
 	try {
-	    return lista.get(0);
-	} catch (Exception e) {
+	    return lista.get( 0 );
+	}
+	catch( Exception e ) {
 	    return null;
 	}
     }
 
     public Escola getEscolaB() {
 	try {
-	    return lista.get(1);
-	} catch (Exception e) {
+	    return lista.get( 1 );
+	}
+	catch( Exception e ) {
 	    return null;
 	}
     }
 
-    public void add(Escola escola) throws QuantidadeDeEscolasExcedenteException, EscolaRepetidaException {
-	verificaSeListaJaPossuiEssaEscola(escola);
+    public void add( Escola escola )
+	    throws QuantidadeDeEscolasExcedenteException, EscolaRepetidaException {
+	verificaSeListaJaPossuiEssaEscola( escola );
 	
-	if (lista.size() < 2) {
-	    lista.add(escola);
-	} else {
+	if ( lista.size() < 2 ) {
+	    lista.add( escola );
+	}
+	else {
 	    throw new QuantidadeDeEscolasExcedenteException(
-		    "Quantidade de escolas acima de 2.");
+		    "Quantidade de escolas acima de 2." );
 	}
     }
 
-    private void verificaSeListaJaPossuiEssaEscola(Escola escola) throws EscolaRepetidaException {
-	for (Escola newEscola : lista) {
-	    if(escola.getCodEscola() == newEscola.getCodEscola()){
-		throw new EscolaRepetidaException("A escola já está na lista.");
+    private void verificaSeListaJaPossuiEssaEscola( Escola escola )
+	    throws EscolaRepetidaException {
+	for ( Escola newEscola : lista ) {
+	    if( escola.getCodEscola() == newEscola.getCodEscola() ){
+		throw new EscolaRepetidaException( "A escola jï¿½ estï¿½ na lista." );
 	    }
 	}
     }
 
-    public void remove(int idNumerico) throws EscolaNaoPresenteException {
+    public void remove( int idNumerico ) throws EscolaNaoPresenteException {
 	boolean verifica = false;
 	
-	for(int i=0; i < lista.size(); i++){
-	    if(idNumerico == lista.get(i).getCodEscola()){
-		lista.remove(i);
+	for( int i=0; i < lista.size(); i++ ){
+	    if( idNumerico == lista.get( i ).getCodEscola() ){
+		lista.remove( i );
 		verifica = true;
 	    }
 	}
 	
-	if(!verifica){
-	    throw new EscolaNaoPresenteException("Escola não pode ser excluída.");
+	if( !verifica ){
+	    throw new EscolaNaoPresenteException( "Escola nï¿½o pode ser excluï¿½da." );
 	}
 	
     }

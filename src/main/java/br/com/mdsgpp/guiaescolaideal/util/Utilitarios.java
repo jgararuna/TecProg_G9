@@ -9,11 +9,11 @@ public final class Utilitarios {
     
     private Utilitarios(){}
     
-    public static void checarParaConteudo(String texto, int tamanhoMinimo)
+    public static void checarParaConteudo( String texto, int tamanhoMinimo )
 	    throws EntradaDadosException {
-	if (!Util.textoTemConteudo(texto, tamanhoMinimo)) {
+	if( !Util.textoTemConteudo( texto, tamanhoMinimo ) ) {
 	    throw new EntradaDadosException(
-		    "Argumento(s) inserido(s) pelo usuário inválido(s).");
+		    "Argumento(s) inserido(s) pelo usuï¿½rio invï¿½lido(s)." );
 	}
     }
 
