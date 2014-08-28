@@ -14,10 +14,10 @@ public class ConnectionFactory {
 	public Connection getConnection() throws SQLException {
 		Connection connection = null;
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName( "com.mysql.jdbc.Driver" );
 
-			connection = DriverManager.getConnection(localhost + database,
-					user, password);
+			connection = DriverManager.getConnection( localhost + database,
+					user, password );
 		} catch (ClassNotFoundException e) {
 			throw new SQLException();
 		}
