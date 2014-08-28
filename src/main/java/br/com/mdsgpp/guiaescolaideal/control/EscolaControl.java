@@ -17,11 +17,12 @@ public class EscolaControl {
     private EscolaDAO escolaDAO;
 
     public EscolaControl(EscolaDAO escolaDAO) throws SQLException {
+	
 	this.escolaDAO = escolaDAO;
+	
     }
 
-    public List<Escola> getEscolaEspecifica(String nomeEscola, String estado,
-	    String nomeMunicipio) throws SQLException, PesquisaException {
+    public List<Escola> getEscolaEspecifica(String nomeEscola, String estado, String nomeMunicipio) throws SQLException, PesquisaException {
 	
 	List<String> listaPalavrasChaves = ConversorDeEntrada
 		.getPalavrasChaveDoTexto(nomeEscola);
@@ -60,6 +61,7 @@ public class EscolaControl {
     }
 
     private List<String> getMunicipioSeForValido(String nomeMunicipio) {
+	
 	List<String> listaPalavrasMunicipio;
 	try {
 	    
@@ -72,5 +74,4 @@ public class EscolaControl {
 	}
 	return listaPalavrasMunicipio;
     }
-
 }
