@@ -27,6 +27,7 @@ public class ContatoControl {
 
     // Contato para o GMAIL
     public ContatoControl() {
+	
 	mailSMTPServer = "smtp.gmail.com";
 	mailSMTPServerPort = "465";
 
@@ -40,18 +41,22 @@ public class ContatoControl {
 
     // Para outro Servidor
     public ContatoControl(String mailSMTPServer, String mailSMTPServerPort) {
+	
 	this.mailSMTPServer = mailSMTPServer;
 	this.mailSMTPServerPort = mailSMTPServerPort;
 	this.session = configuraSession();
+	
     }
 
     public ContatoControl(Session session) {
+	
 	this.session = session;
+	
     }
 
     // Usuario ou seja, a conta que esta enviando o email (tem que ser do GMAIL)
-    public void sendMail(String from, String to, String subject, String message)
-	    throws ContatoException {
+    public void sendMail(String from, String to, String subject, String message) throws ContatoException {
+	
 	session.getProperties().put("mail.smtp.user", from); // usuario ou seja, a conta que esta enviando o email (tem que ser do GMAIL)
 
 	// Objeto que contém a mensagem
@@ -68,8 +73,7 @@ public class ContatoControl {
 	    msg.setContent(message, "text/plain");
 
 	} catch (Exception e) {
-	    throw new MensagemNaoCompletadaException(
-		    "A mensagem não foi completada.");
+	    throw new MensagemNaoCompletadaException( "A mensagem não foi completada." );
 
 	}
 
@@ -84,21 +88,22 @@ public class ContatoControl {
 	     * sua senha do gmail
 	     */
 
-	    tr.connect(mailSMTPServer, "contato.guiaescolaideal@gmail.com",
-		    "4t6Li40vZt");
+	    tr.connect( mailSMTPServer, "contato.guiaescolaideal@gmail.com","4t6Li40vZt" );
 	    msg.saveChanges(); // Don't forget this
 
 	    // Envio da mensagem
 	    tr.sendMessage(msg, msg.getAllRecipients());
 	    tr.close();
 	} catch (Exception e) {
-	    // TODO Auto-generated catch block
-	    throw new EnvioException("Erro ao enviar mensagem.");
+
+	    throw new EnvioException( "Erro ao enviar mensagem." );
+	    
 	}
 
     }
 
     private Session configuraSession() {
+	
 	Properties props = new Properties();
 
 	// Quem estiver utilizando um SERVIDOR PROXY descomente essa parte e
@@ -125,7 +130,6 @@ public class ContatoControl {
 	auth = new SimpleAuth("contato.guiaescolaideal@gmail.com", "4t6Li40vZt");
 
 	// Session - objeto que ira realizar a conexão com o servidor
-
 	/**
 	 * Como há necessidade de autenticação é criada uma autenticacao que é
 	 * responsavel por solicitar e retornar o usuário e senha para
@@ -136,12 +140,14 @@ public class ContatoControl {
 	session.setDebug(true); // Habilita o LOG das ações executadas durante o
 				// envio do email
 	return session;
+	
     }
 }
 
 // Clase que retorna uma autenticacao para ser enviada e verificada pelo
 // servidor smtp
 class SimpleAuth extends Authenticator {
+    
     public String username = null;
     public String password = null;
 
