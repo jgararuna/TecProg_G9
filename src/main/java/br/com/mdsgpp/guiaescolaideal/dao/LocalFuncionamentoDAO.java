@@ -10,23 +10,26 @@ import br.com.mdsgpp.guiaescolaideal.model.LocalFuncionamento;
 public class LocalFuncionamentoDAO {
 	private Connection connection;
 
-	public LocalFuncionamentoDAO(Connection connection) {
+	public LocalFuncionamentoDAO( Connection connection ) {
 		this.connection = connection;
 	}
 
-	public LocalFuncionamento pesquisarPorID(int id) throws SQLException {
+	/** Metodo para pesquisar determinado local de funcionamento por 
+	 *  ID no banco de dados
+	 */
+	public LocalFuncionamento pesquisarPorID( int id ) throws SQLException {
 		String sql = "select * from local_funcionamento where COD_LOCAL_FUNCIONAMENTO = ?";
 
-		PreparedStatement stmt = this.connection.prepareStatement(sql);
-		stmt.setInt(1, id);
+		PreparedStatement stmt = this.connection.prepareStatement( sql );
+		stmt.setInt( 1, id );
 
 		ResultSet rs = stmt.executeQuery();
 		LocalFuncionamento localfuncionamento = null;
 
-		if (rs.next()) {
+		if ( rs.next() ) {
 			localfuncionamento = new LocalFuncionamento();
-			localfuncionamento.setTipoLocalFuncionamento(rs
-					.getString("COD_LOCAL_FUNCIONAMENTO"));
+			localfuncionamento.setTipoLocalFuncionamento( rs
+					.getString( "COD_LOCAL_FUNCIONAMENTO" ) );
 		}
 
 		stmt.close();
